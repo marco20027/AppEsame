@@ -18,17 +18,14 @@ function Copyright() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
-          Your Website
-        </Link>{' '}
+        <Link color="inherit" href="http://localhost:3000/Home">
+          CRM
+        </Link>{''}
         {new Date().getFullYear()}
         {'.'}
       </Typography>
     );
-  }
-  
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  
+  }  
   const theme = createTheme();
   
   function Chisiamo() {
@@ -43,7 +40,7 @@ function Copyright() {
           </Toolbar>
         </AppBar>
         <main>
-          {/* Hero unit */}
+          {/*  */}
           <Box
             sx={{
               bgcolor: 'background.paper',
@@ -165,15 +162,7 @@ function Copyright() {
         {/* Footer */}
         <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
           <Typography variant="h6" align="center" gutterBottom>
-            Footer
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="text.secondary"
-            component="p"
-          >
-            Something here to give the footer a purpose!
+            <img  src='https://cdn.dribbble.com/users/1266491/screenshots/3671609/media/9eac6f4eb377d901d3c63b945eab92d1.png?compress=1&resize=400x300&vertical=top'/>
           </Typography>
           <Copyright />
         </Box>

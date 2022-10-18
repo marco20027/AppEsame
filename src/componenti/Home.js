@@ -35,7 +35,7 @@ function Home () {
                     </IconButton>
                     <Button color='inherit' href='/Consulenza'>Vuoi una consulenza ?</Button>
                     <Button color='inherit' href='/Chisiamo'>Chi siamo ?</Button>
-                    <Button color='inherit' href=''>Dove siamo?</Button>
+                    <Button color='inherit' href='/Dovesiamo'>Dove siamo?</Button>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     </Typography>
                     <Button color="inherit">Login</Button>
@@ -64,11 +64,7 @@ function Home () {
                     <div className='App'>
                         <img src='https://www.weclapp.it/wp-content/uploads/sites/1/2021/02/sistema-crm.png' />
                     </div>
-                    <h2>Vuoi prenotare una consulenza ?</h2><br></br>
-                    <div className='App'>
-                        <img src='https://www.insidemarketing.it/wp-content/uploads/2019/02/Customer-relationship-management-620x401.jpg' /><br></br>
-                    </div>
-                    <Button className='App' variant='contained' href='/Consulenza'>Vuoi prenotare una consulenza ?</Button>
+                  
 
 
 
@@ -86,13 +82,10 @@ function Home () {
                 >
 
                     <Container maxWidth="sm">
-                        <Typography variant="body1">
-                            <img src=''></img>
-                        </Typography>
                         <Typography variant="body2" color="text.secondary">
                             {'Copyright © '}
-                            <Link color="inherit" href="https://mui.com/">
-                                Your Website
+                            <Link color="inherit" href="http://localhost:3000/Home">
+                                CRM
                             </Link>{' '}
                             {new Date().getFullYear()}
                             {'.'}
