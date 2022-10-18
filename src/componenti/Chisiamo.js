@@ -71,7 +71,7 @@ function Copyright() {
                 spacing={2}
                 justifyContent="center"
               >
-                <Button variant="contained" href="http://localhost:3001/consulenza">Prenota la tua consulenza</Button>
+                <Button variant="contained" href="http://localhost:3000/consulenza">Prenota la tua consulenza</Button>
               </Stack>
             </Container>
           </Box>

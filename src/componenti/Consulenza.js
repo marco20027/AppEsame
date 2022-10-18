@@ -62,9 +62,16 @@ function Consulenza(props) {
                 type="text"
                 id="Pre"
                 autoComplete="current-password" />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me" />
+                <TextField
+                margin='normal'
+                required
+                fullWidth
+                name='telefono'
+                label='telefono'
+                type="text"
+                id='cell'
+                autoComplete='current-number' />
+              
               <Button
                 type="submit"
                 fullWidth
@@ -73,18 +80,6 @@ function Consulenza(props) {
               >
                 Invia Prenotazione
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
           <Typography variant="body2" color="text.secondary" align="center" {...props}>
