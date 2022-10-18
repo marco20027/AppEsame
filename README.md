@@ -69,5 +69,4 @@ Questa sezione è stata spostata qui: [https://facebook.github.io/create-react-a
 
 Questa sezione è stata spostata qui: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
-Tradotto con www.DeepL.com/Translator (versione gratuita)
+Manca l'aggiunta del login e chi è loggato può prenotare una consulenza e le sue prenotazioni
