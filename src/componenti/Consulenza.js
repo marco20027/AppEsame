@@ -9,6 +9,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { useState, useEffect } from 'react';
 
 function Consulenza(props) {
   const handleSubmit = (event) => {
@@ -20,6 +28,53 @@ function Consulenza(props) {
     });
 
   };
+  const [email, setEmail] = useState(null)
+  const [consulenza, setConsulenza] = useState(null)
+  const [telefono, setTelefono] = useState(null)
+  const [listaConsulenza, setListaConsulenza] = useState([])
+
+  useEffect(()=>{
+    getConsulenza()
+  },[])
+
+  const getConsulenza = async () =>{
+    const token = localStorage.getItem("token")
+    const response = await fetch('http://localhost:3001/consulenza',
+    {
+      method: 'GET',
+      headers : {
+        "Content-Type": "application/json",
+         "Authorization": "Bearer " + token
+      }
+    })
+    const data = await response.json()
+    console.log("risultati", data);
+    setListaConsulenza(...listaConsulenza, data)
+  }
+  const creazioneConsulenza = async () => {
+    const token = localStorage.getItem("token")
+    if(email && consulenza && telefono){
+      const response = await fetch('http://localhost:3001/consulenza',
+      {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({email: email, consulenza: consulenza, telefono: telefono})
+      })
+      const data = await response.json()
+      console.log(data);
+      getConsulenza()
+      setEmail('')
+      setConsulenza('')
+      setTelefono('')
+    }
+    else
+     {
+      window.alert("I campi titolo e descrizione sono entrambi obbligatori");
+     }
+  }
 
     const theme = createTheme();
   return (
@@ -49,7 +104,8 @@ function Consulenza(props) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus />
+                autoFocus
+                onChange={(event)=> setEmail(event.target.value)} />
               <TextField
                 margin="normal"
                 required
@@ -58,7 +114,8 @@ function Consulenza(props) {
                 label="Prenotati"
                 type="text"
                 id="Pre"
-                autoComplete="current-password" />
+                autoComplete="current-password" 
+                onChange={(event)=> setConsulenza(event.target.value)}/>
                 <TextField
                 margin='normal'
                 required
@@ -67,21 +124,51 @@ function Consulenza(props) {
                 label='telefono'
                 type="text"
                 id='cell'
-                autoComplete='current-number' />
+                autoComplete='current-number' 
+                onChange={(event)=> setTelefono(event.target.value)}/>
               
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={creazioneConsulenza}
               >
                 Invia Prenotazione
               </Button>
             </Box>
           </Box>
+          <TableContainer >
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Le tue prenotazioni</TableCell>
+            <TableCell align="right">Email</TableCell>
+            <TableCell align="right">Consulenza</TableCell>
+            <TableCell align="right">Telefono</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {listaConsulenza.map((item, index) => (
+            <TableRow
+             
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                Prenotazioni
+              </TableCell>
+              <TableCell align="right">{item.email}</TableCell>
+              <TableCell align="right">{item.consulenza}</TableCell>
+              <TableCell align="right">{item.telefono}</TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
           <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://locahost:3001">
+      <Link color="inherit" path='/Home'>
         CRM consulenza
       </Link>{' '}
       {new Date().getFullYear()}
