@@ -9,11 +9,13 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import TextField from '@mui/material/TextField';
+import {useState} from 'react'
+import  {useNavigate}  from 'react-router-dom';
 
 function Home() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
+   
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -38,7 +40,7 @@ function Home() {
             if (data.token) {
                 localStorage.setItem('token', data.token)
                 console.log(data.token)
-                navigate('/principale')
+                navigate('/consulenza')
             } else {
                 window.alert("Email o password errata");
             }
@@ -46,6 +48,7 @@ function Home() {
         } catch (err) {
 
         }
+        console.log(data)
     }
 
     return (
@@ -66,24 +69,7 @@ function Home() {
                     <Button color='inherit' href='/Dovesiamo'>Dove siamo?</Button>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     </Typography>
-                    <Button color="inherit" onClick={handleOpen}>Login</Button>
-                    <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                    >
-                        <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                LOGIN
-                            </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            <TextField id="outlined-basic" label="Outlined" variant="email" onChange={takeEmail(event)} /><br></br>
-                            <TextField id="outlined-basic" label="Outlined" variant="password" onChanhe={takePassword(event)} /><br></br>
-                            <Button variant='outlined' onClick={login} >Login</Button>
-                            </Typography>
-                        </Box>
-                    </Modal>
+               
                 </Toolbar>
             </AppBar>
         </Box><Box
@@ -109,6 +95,9 @@ function Home() {
                     <div className='App'>
                         <img src='https://www.weclapp.it/wp-content/uploads/sites/1/2021/02/sistema-crm.png' />
                     </div>
+                    <input id="outlined-basic" label="Outlined" variant="email" onChange={(event)=>takeEmail(event)} /><br></br>
+                    <input id="outlined-basic" label="Outlined" type='password'variant="password" onChange={(event)=>takePassword(event)} /><br></br>
+                    <Button color="inherit" onClick={login}>Login</Button>
 
 
 
