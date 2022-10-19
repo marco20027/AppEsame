@@ -10,17 +10,45 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-function Home () {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-  
-    return(
+function Home() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+
+    const takeEmail = (event) => {
+        setEmail(event.target.value)
+    }
+    const takePassword = (event) => {
+        setPassword(event.target.value)
+    }
+    const navigate = useNavigate();
+    const login = async () => {
+        try {
+
+            const response = await fetch("http://localhost:3001/login", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            })
+            const data = await response.json();
+            if (data.token) {
+                localStorage.setItem('token', data.token)
+                console.log(data.token)
+                navigate('/principale')
+            } else {
+                window.alert("Email o password errata");
+            }
+
+        } catch (err) {
+
+        }
+    }
+
+    return (
         <><Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
@@ -38,7 +66,24 @@ function Home () {
                     <Button color='inherit' href='/Dovesiamo'>Dove siamo?</Button>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button color="inherit" onClick={handleOpen}>Login</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                LOGIN
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                            <TextField id="outlined-basic" label="Outlined" variant="email" onChange={takeEmail(event)} /><br></br>
+                            <TextField id="outlined-basic" label="Outlined" variant="password" onChanhe={takePassword(event)} /><br></br>
+                            <Button variant='outlined' onClick={login} >Login</Button>
+                            </Typography>
+                        </Box>
+                    </Modal>
                 </Toolbar>
             </AppBar>
         </Box><Box
@@ -64,7 +109,7 @@ function Home () {
                     <div className='App'>
                         <img src='https://www.weclapp.it/wp-content/uploads/sites/1/2021/02/sistema-crm.png' />
                     </div>
-                  
+
 
 
 
@@ -94,7 +139,7 @@ function Home () {
                     </Container>
                 </Box>
             </Box></>
-  
+
 
     )
 }
