@@ -21,10 +21,11 @@ import { useState, useEffect } from 'react';
 function Consulenza(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(event.target.value);
     console.log({
       email: data.get('email'),
-      password: data.get('password'),
+      consulenza: data.get('consulenza'),
+      telefono: data.get('telefono')
     });
 
   };
@@ -49,7 +50,7 @@ function Consulenza(props) {
     })
     const data = await response.json()
     console.log("risultati", data);
-    setListaConsulenza(...listaConsulenza, data)
+    setListaConsulenza(data)
   }
   const creazioneConsulenza = async () => {
     const token = localStorage.getItem("token")
@@ -72,7 +73,7 @@ function Consulenza(props) {
     }
     else
      {
-      window.alert("I campi titolo e descrizione sono entrambi obbligatori");
+      window.alert("Tutti i campi sono obbligatori");
      }
   }
 
@@ -101,7 +102,7 @@ function Consulenza(props) {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email "
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -111,7 +112,7 @@ function Consulenza(props) {
                 required
                 fullWidth
                 name="prenotazione"
-                label="Prenotati"
+                label="Descrizione"
                 type="text"
                 id="Pre"
                 autoComplete="current-password" 
@@ -121,7 +122,7 @@ function Consulenza(props) {
                 required
                 fullWidth
                 name='telefono'
-                label='telefono'
+                label='Telefono'
                 type="text"
                 id='cell'
                 autoComplete='current-number' 
@@ -148,10 +149,9 @@ function Consulenza(props) {
             <TableCell align="right">Telefono</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+       
           {listaConsulenza.map((item, index) => (
-            <TableRow
-             
+            <TableRow             
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -162,15 +162,15 @@ function Consulenza(props) {
               <TableCell align="right">{item.telefono}</TableCell>
              
             </TableRow>
-          ))}
-        </TableBody>
+          ))} 
+        
       </Table>
     </TableContainer>
           <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" path='/Home'>
         CRM consulenza
-      </Link>{' '}
+      </Link>{'/Home '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>

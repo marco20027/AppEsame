@@ -27,28 +27,38 @@ function Home() {
     }
     const navigate = useNavigate();
     const login = async () => {
+        if(email == null){
+            alert('inserire email')
+            return
+        }else if(password == null){
+            alert('inserire password')
+            return
+        }
         try {
 
             const response = await fetch("http://localhost:3001/login", {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email, password })
-            })
-            const data = await response.json();
-            if (data.token) {
-                localStorage.setItem('token', data.token)
-                console.log(data.token)
-                navigate('/consulenza')
-            } else {
-                window.alert("Email o password errata");
-            }
+                 method: 'POST',
+                 headers: {
+                     "Content-Type": "application/json"
+                 },
+                 body: JSON.stringify({ email, password })
+             })
+             console.log(response)
+             const data = await response.json();
+             console.log(data)
+             if (data.token) {
+                 localStorage.setItem('token',data.token)
+                 console.log(data.token)
+                 navigate('/Consulenza')
+             } else {
+                 window.alert("Email o password errata");
+             }
 
-        } catch (err) {
+         } catch (err) {
 
         }
-        console.log(data)
+        
+        
     }
 
     return (
@@ -88,16 +98,36 @@ function Home() {
                     <Typography variant="h5" component="h2" gutterBottom>
                         {"Che cos'è il CRM ?"}
                         {" Customer Relationship Management (in sigla CRM) è il processo con cui un'azienda o un'altra organizzazione amministra le sue interazioni con i clienti, in genere utilizzando l'analisi dei dati per studiare grandi quantità di informazioni."}
+                       
                     </Typography><br></br>
+                    <img  src='https://cdn.dribbble.com/users/1266491/screenshots/3671609/media/9eac6f4eb377d901d3c63b945eab92d1.png?compress=1&resize=400x300&vertical=top'/>
+
+                    <Typography>
+                        
+                        <h2>Effettua il login per accedere alle tue prenotazioni</h2>
+                    </Typography><br></br>
+                    <Box
+                      sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      minHeight: '100vh',
+                      }}
+                      >
+                       
+                    <TextField id="outlined-basic" type ='email' label="Email" variant="outlined" onChange={(event)=>takeEmail(event)} /><br></br>
+                    <TextField id="outlined-basic" type ='password' label="Password" variant="outlined" onChange={(event)=>takePassword(event)} /><br></br>
+                    <Button variant='contained' href='/Consulenza' onClick={login}>Login</Button><br></br>
+                    
 
 
                     <Typography variant="body1"></Typography>
                     <div className='App'>
                         <img src='https://www.weclapp.it/wp-content/uploads/sites/1/2021/02/sistema-crm.png' />
-                    </div>
-                    <input id="outlined-basic" label="Outlined" variant="email" onChange={(event)=>takeEmail(event)} /><br></br>
-                    <input id="outlined-basic" label="Outlined" type='password'variant="password" onChange={(event)=>takePassword(event)} /><br></br>
-                    <Button color="inherit" onClick={login}>Login</Button>
+                    </div></Box>
+
+
+                   
+                    
 
 
 
