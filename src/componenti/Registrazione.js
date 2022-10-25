@@ -23,7 +23,7 @@ function Registrazione () {
     }
      const navigate = useNavigate();
     const registrazione = async () => {
-        const token = localStorage.getItem("token")
+        //const token = localStorage.getItem("token")
         if(email && password && confermaPassword){}
         try {
 
@@ -31,9 +31,10 @@ function Registrazione () {
                  method: 'POST',
                  headers: {
                      "Content-Type": "application/json",
-                     "Authorization": "Bearer " + token
+                     
                  },
                  body: JSON.stringify({ email, password, confermaPassword })
+                
              })
              const data = await response.json()
              setEmail('')
@@ -42,9 +43,11 @@ function Registrazione () {
              console.log(response)
             
          } catch (err) {
+            
 
         
     }
+    
      //navigate('/Consulenza')
         
         
@@ -60,9 +63,9 @@ function Registrazione () {
                       >
                         <h1>Registrati !</h1>
                        
-                    <TextField id="outlined-basic" type ='email' label="Email" variant="outlined" onChange={(event)=>setEmail(event)} /><br></br>
-                    <TextField id="outlined-basic" type ='password' label="Password" variant="outlined" onChange={(event)=>setPassword(event)} /><br></br>
-                    <TextField id="outlined-basic" type ='password' label="Conferma Password" variant="outlined" onChange={(event)=>setConfermaPassword(event)} /><br></br>
+                    <TextField id="outlined-basic" type ='email' label="Email" variant="outlined" onChange={(event)=>takeEmail(event)} /><br></br>
+                    <TextField id="outlined-basic" type ='password' label="Password" variant="outlined" onChange={(event)=>takePassword(event)} /><br></br>
+                    <TextField id="outlined-basic" type ='password' label="Conferma Password" variant="outlined" onChange={(event)=>takeConfermaPassword(event)} /><br></br>
                     <Button variant='contained'  onClick={registrazione}>Login</Button><br></br></Box>
                     <Alert severity="success">utente registrato con successo </Alert>
 

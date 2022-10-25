@@ -76,6 +76,25 @@ function Consulenza(props) {
       window.alert("Tutti i campi sono obbligatori");
      }
   }
+  const deleteConsulenza = async (id) => {
+    const token = localStorage.getItem("token")
+    const response = await fetch("http://localhost:3001/consulenza/"+id,
+        {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token 
+            },
+        })
+    
+    const data = await response.json();
+    console.log(data);
+const nuovaConsulenza = listaConsulenza.filter((consulenza) => consulenza.id != id);
+
+setListaConsulenza(nuovaConsulenza);
+console.log(nuovaConsulenza)
+
+  }
 
     const theme = createTheme();
   return (
@@ -139,19 +158,21 @@ function Consulenza(props) {
               </Button>
             </Box>
           </Box>
-          <TableContainer >
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <div className='App'>
+      <Table   aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Le tue prenotazioni</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Consulenza</TableCell>
-            <TableCell align="right">Telefono</TableCell>
+            <TableCell><b>Le tue prenotazioni</b></TableCell>
+            <TableCell align="right"><b>Email</b></TableCell>
+            <TableCell align="right"><b>Consulenza</b></TableCell>
+            <TableCell align="right"><b>Telefono</b></TableCell>
           </TableRow>
         </TableHead>
        
           {listaConsulenza.map((item, index) => (
-            <TableRow             
+            
+            <TableRow  
+            key={index.id}           
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -160,12 +181,14 @@ function Consulenza(props) {
               <TableCell align="right">{item.email}</TableCell>
               <TableCell align="right">{item.consulenza}</TableCell>
               <TableCell align="right">{item.telefono}</TableCell>
+              <TableCell align="right"><Button variant="contained" color="error" onClick={() => deleteConsulenza()}>Cancella</Button></TableCell>
              
             </TableRow>
           ))} 
         
       </Table>
-    </TableContainer>
+      </div>
+  
           <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" path='/Home'>
