@@ -37,6 +37,10 @@ function Copyright() {
             <Typography variant="h6" color="inherit" noWrap>
               Consulenza CRM
             </Typography>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    </Typography>
+            <Button color="inherit" href='/Home'>Home</Button>
+
           </Toolbar>
         </AppBar>
         <main>
