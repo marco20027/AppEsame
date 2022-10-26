@@ -27,15 +27,10 @@ function Home() {
     }
     const navigate = useNavigate();
     const login = async () => {
-        if(email == null){
-            alert('inserire email')
-            return
-        }else if(password == null){
-            alert('inserire password')
-            return
-        }
-        try {
-
+        if(email == null && password == null){
+            alert('inserire email e password')
+            return 
+        }else {
             const response = await fetch("http://localhost:3001/login", {
                  method: 'POST',
                  headers: {
@@ -53,11 +48,9 @@ function Home() {
              } else {
                  window.alert("Email o password errata");
              }
+            }
 
-         } catch (err) {
-
-        }
-        
+         
         
     }
 
@@ -116,7 +109,7 @@ function Home() {
                        
                     <TextField id="outlined-basic" type ='email' label="Email" variant="outlined" onChange={(event)=>takeEmail(event)} /><br></br>
                     <TextField id="outlined-basic" type ='password' label="Password" variant="outlined" onChange={(event)=>takePassword(event)} /><br></br>
-                    <Button variant='contained' href='/Consulenza' onClick={login}>Login</Button><br></br>
+                    <Button variant='contained'  onClick={login}>Login</Button><br></br>
                     
 
 
