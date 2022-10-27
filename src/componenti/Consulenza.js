@@ -181,7 +181,7 @@ console.log(nuovaConsulenza)
               <TableCell align="right">{item.email}</TableCell>
               <TableCell align="right">{item.consulenza}</TableCell>
               <TableCell align="right">{item.telefono}</TableCell>
-              <TableCell align="right"><Button variant="contained" color="error" onClick={() => deleteConsulenza()}>Cancella</Button></TableCell>
+              <TableCell align="right"><Button variant="contained" color="error" onClick={() => deleteConsulenza(item.id)}>Cancella</Button></TableCell>
              
             </TableRow>
           ))} 
